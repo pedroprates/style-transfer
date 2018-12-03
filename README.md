@@ -4,11 +4,11 @@
 
 This notebook was was based on the *Style Transfer* method developed by the paper [Image Style Transfer Using Convolutional Neural Networks](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf), with the PyTorch framework. 
 
-In this paper, style transfer uses features extracted by a 19-layer pre-trained [VGG-network](https://arxiv.org/pdf/1409.1556.pdf). In the image below, the convolutional layers of the network are named by stack and the order inside each stack, i.e., *conv1_2* means a convolutional layer on the *first stack* of convolutional layers and the *second position*. The deepest layer on this network will be *conv5_4*. 
+In this paper it's proposed the style transfer method, which uses features extracted by a 19-layer pre-trained [VGG-network](https://arxiv.org/pdf/1409.1556.pdf). In the image below, the convolutional layers of the network are named by stack and the order inside each stack, i.e., *conv1_2* means a convolutional layer on the *first stack* and the *second position*. The deepest layer on this network will be *conv5_4*. 
 
 ![VGGNet](nb-imgs/vgg19_convlayers.png)
 
-The pre-trained network will come from the models on the [Torchvision model-zoo](https://pytorch.org/docs/stable/torchvision/models.html), made available via
+The pre-trained network will come from the models on the [Torchvision model-zoo](https://pytorch.org/docs/stable/torchvision/models.html), and to download them you just need this code: 
 
 ```python
 from torchvision import models
@@ -16,7 +16,7 @@ from torchvision import models
 models.vgg19(pretrained=True).features
 ```
 
-As seen on the picture above, this network is splitted as two major parts: the **features** and the **classifier**. The *features* will contain the feature extractor, the convolutional stacks together with pooling layers, when the *classifier* will have only the fully-connected layers and the last *softmax* layer to train the network to perform some classification. As we are going to use the **VGG19** only for extracting features from the *content*, *style* and *target* images (and therefore NO classifications tasks), we won't need the latter part of this network. 
+As seen on the picture above, this network is splitted into two major parts: the **features** and the **classifier**. The *features* will contain the feature extractor - the convolutional stacks together with pooling layers - and the *classifier* will have only the fully-connected layers and the *softmax* layer to train the network to perform some classification. As we are going to use the **VGG19** only for extracting features from the *content*, *style* and *target* images (and therefore **no** classifications tasks), we won't need the latter part of this network. 
 
 The resulting image (*target*) should contain the desired components: objects and their arrangements should be similar to that of the **content image**, and style, colors and textures are similar to that of the **style image**. This is done comparing the output of a few convolution layers, which are described by the paper. 
 
@@ -26,7 +26,7 @@ As an example of the results of this notebook, it's shown on the image below the
 
 ![IbitirunaColorsOfBrazil](nb-imgs/style-transfer.png)
 
-On the `style-transfer.ipynb` notebook, it's shown this method, step by step, developed usign the PyTorch framework.
+On the `style-transfer.ipynb` notebook, it's presented this method, step by step, developed usign the PyTorch framework.
 
 ## Google Colaboratory
 
@@ -40,7 +40,7 @@ It's important to remember that before you run anything on Google Colab, you sho
      alt="GPUColab"
      style="max-width: 500px;" />
 
-After configurating the Runtime Options of your notebook you are good to go! Other thing to be remembered is to keep the model and the *target* image (since it's pixels will be updated through *training*) always on the `cuda` (something that the code on the notebook already takes care of).
+After configurating the Runtime Options of your notebook you are good to go! Other thing to be remembered is to keep the model and the *target* image (since its pixels will be updated through *training*) always on the `cuda` (something that the code on the notebook already takes care of).
 
 To try this code with your own images, just download the notebook, run it on Google Colab and import your own images also on Colab! 
 
