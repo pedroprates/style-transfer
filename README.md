@@ -13,7 +13,7 @@ The pre-trained network will come from the models on the [Torchvision model-zoo]
 ```python
 from torchvision import models
 
-models.vgg10(pretrained=True).features
+models.vgg19(pretrained=True).features
 ```
 
 As seen on the picture above, this network is splitted as two major parts: the **features** and the **classifier**. The *features* will contain the feature extractor, the convolutional stacks together with pooling layers, when the *classifier* will have only the fully-connected layers and the last *softmax* layer to train the network to perform some classification. As we are going to use the **VGG19** only for extracting features from the *content*, *style* and *target* images (and therefore NO classifications tasks), we won't need the latter part of this network. 
